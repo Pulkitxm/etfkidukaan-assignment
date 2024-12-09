@@ -5,6 +5,7 @@ import Dashboard from "./Dashboard";
 import Login from "./Login";
 import EmployeeList from "./EmployeeList";
 import EmployeeDetail from "./EmployeeDetail";
+import EditEmployee from "./EditEmployee";
 
 const routes: {
   path: string;
@@ -38,6 +39,11 @@ const routes: {
   {
     path: "/employees/:id",
     element: <EmployeeDetail />,
+    isProtected: true,
+  },
+  {
+    path: "/employees/:id/edit",
+    element: <EditEmployee />,
     isProtected: true,
   },
 ] as const;

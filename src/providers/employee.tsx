@@ -77,6 +77,17 @@ export const EmployeeProvider: React.FC<{
     [employees]
   );
 
+  const updateEmployee = useCallback(
+    async (index: number, employee: Employee) => {
+      const newEmployees = employees.map((e, i) =>
+        i === index ? employee : e
+      );
+      localStorgaeOps.set(newEmployees);
+      setEmployees(newEmployees);
+    },
+    [employees]
+  );
+
   const getMonthWiseWorkTime = useCallback(() => {
     const monthWiseWorkTime: Record<string, number> = {};
     for (const month of months) {
@@ -106,6 +117,7 @@ export const EmployeeProvider: React.FC<{
         allTimeWork,
         loading,
         deleteEmployee,
+        updateEmployee,
       }}
     >
       {children}

@@ -10,6 +10,7 @@ export const EmployeeContext = createContext<{
   allTimeWork: Record<string, number>;
   loading: boolean;
   deleteEmployee: (id: number) => void;
+  updateEmployee: (index: number, employee: Employee) => Promise<void>;
 }>({
   employees: [],
   loading: false,
@@ -19,4 +20,5 @@ export const EmployeeContext = createContext<{
   }),
   allTimeWork: {},
   deleteEmployee: () => {},
+  updateEmployee: async () => {},
 });
