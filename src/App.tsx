@@ -6,7 +6,7 @@ export default function App() {
   return (
     <div className="h-screen w-screen flex flex-col">
       <Toaster />
-      <div className="h-18">
+      <div className="h-18 mb-2">
         <Navbar />
       </div>
       <div className="flex-grow overflow-y-auto">

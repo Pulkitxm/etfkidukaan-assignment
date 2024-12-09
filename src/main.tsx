@@ -4,11 +4,20 @@ import App from "./App.tsx";
 
 import { AuthProvider } from "./providers/auth.tsx";
 import { BrowserRouter } from "react-router-dom";
+import { EmployeeProvider } from "./providers/employee.tsx";
+
+function AllProviders({ children }: { children: JSX.Element }) {
+  return (
+    <AuthProvider>
+      <EmployeeProvider>{children}</EmployeeProvider>
+    </AuthProvider>
+  );
+}
 
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
-    <AuthProvider>
+    <AllProviders>
       <App />
-    </AuthProvider>
+    </AllProviders>
   </BrowserRouter>
 );
