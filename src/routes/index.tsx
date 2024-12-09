@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
 import EmployeeList from "./EmployeeList";
+import EmployeeDetail from "./EmployeeDetail";
 
 const routes: {
   path: string;
@@ -32,6 +33,11 @@ const routes: {
   {
     path: "/employees",
     element: <EmployeeList />,
+    isProtected: true,
+  },
+  {
+    path: "/employees/:id",
+    element: <EmployeeDetail />,
     isProtected: true,
   },
 ] as const;

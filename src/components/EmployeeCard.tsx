@@ -1,4 +1,4 @@
-import { Employee } from "@/data/employees";
+import { Employee } from "@/types/employee";
 
 interface EmployeeCardProps {
   employee: Employee;

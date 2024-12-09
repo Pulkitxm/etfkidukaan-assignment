@@ -8,7 +8,7 @@ import { DataGrid, GridColDef, GridRowsProp } from "@mui/x-data-grid";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 
-function EmployeeList() {
+export default function EmployeeList() {
   const { isAuthorizedTo } = useContext(AuthContext);
   const { employees, loading, deleteEmployee } = useContext(EmployeeContext);
 
@@ -83,7 +83,7 @@ function EmployeeList() {
   };
 
   const handleDelete = (id: number) => {
-    deleteEmployee(id);
+    deleteEmployee(id-1);
   };
 
   return (
@@ -103,7 +103,7 @@ function EmployeeList() {
               paginationMode="client"
               paginationModel={paginationModel}
               onPaginationModelChange={handlePaginationChange}
-              pageSizeOptions={[10, 20, 30]} // Options for the user to select page size
+              pageSizeOptions={[10, 20, 30]}
               sx={{ border: 0 }}
             />
           </div>
@@ -112,5 +112,3 @@ function EmployeeList() {
     </div>
   );
 }
-
-export default EmployeeList;
