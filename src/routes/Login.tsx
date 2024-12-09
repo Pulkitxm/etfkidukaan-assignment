@@ -5,6 +5,7 @@ import { LuLoader } from "react-icons/lu";
 
 import LoginGraphic from "@/assets/login-graphic.png";
 import { toast } from "sonner";
+import { RBAC_ROLES } from "@/types/user";
 
 type LoginFormValues = {
   email: string;
@@ -35,13 +36,16 @@ export default function Login() {
       await logIn({
         email: formValues.email,
         password: formValues.password,
+        role: formValues.email.includes("admin")
+          ? RBAC_ROLES.ADMIN
+          : RBAC_ROLES.USER,
       });
       setLoading(false);
       toast.success("You are successfully loggged in");
 
       navigate("/dashboard");
     },
-    [logIn, navigate]
+    [loading, logIn, navigate]
   );
 
   return (

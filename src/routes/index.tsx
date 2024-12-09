@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
+import EmployeeList from "./EmployeeList";
 
 const routes: {
   path: string;
@@ -27,6 +28,11 @@ const routes: {
   {
     path: "/register",
     element: <Login />,
+  },
+  {
+    path: "/employees",
+    element: <EmployeeList />,
+    isProtected: true,
   },
 ] as const;
 

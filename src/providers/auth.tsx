@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from "react";
 
-import { USER, validateUser } from "@/types/user";
+import { OPERATIONS, RBAC, USER, validateUser } from "@/types/user";
 import { AuthContext } from "@/context/auth";
 
 interface AuthProviderProps {
@@ -24,7 +24,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = useCallback(async (user: USER) => {
     await new Promise<void>((resolve) => setTimeout(() => resolve(), 1000));
     setUser(user);
-    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("user", JSON.stringify({
+      email: user.email,
+      password: user.password,
+      role: user.role
+    }));
   }, []);
 
   const logout = useCallback(async () => {
@@ -32,6 +36,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setUser(null);
     localStorage.removeItem("user");
   }, []);
+
+  const isAuthorizedTo = useCallback(
+    (operation: OPERATIONS) => {
+      if (!user) return false;
+      if (RBAC[user.role][operation]) return true;
+      return false;
+    },
+    [user]
+  );
 
   return (
     <AuthContext.Provider
@@ -41,6 +54,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         logOut: logout,
         isLoggedIn,
         isLoggedOut: !isLoggedIn,
+        isAuthorizedTo,
       }}
     >
       {children}

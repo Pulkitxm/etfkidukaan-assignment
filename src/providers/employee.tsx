@@ -68,6 +68,15 @@ export const EmployeeProvider: React.FC<{
     return es;
   }, []);
 
+  const deleteEmployee = useCallback(
+    async (id: number) => {
+      const newEmployees = employees.filter((_, index) => index !== id);
+      localStorgaeOps.set(newEmployees);
+      setEmployees(newEmployees);
+    },
+    [employees]
+  );
+
   const getMonthWiseWorkTime = useCallback(() => {
     const monthWiseWorkTime: Record<string, number> = {};
     for (const month of months) {
@@ -91,7 +100,13 @@ export const EmployeeProvider: React.FC<{
 
   return (
     <EmployeeContext.Provider
-      value={{ employees, getMonthWiseWorkTime, allTimeWork, loading }}
+      value={{
+        employees,
+        getMonthWiseWorkTime,
+        allTimeWork,
+        loading,
+        deleteEmployee,
+      }}
     >
       {children}
     </EmployeeContext.Provider>

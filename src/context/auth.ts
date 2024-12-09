@@ -1,4 +1,4 @@
-import { USER } from "@/types/user";
+import { OPERATIONS, USER } from "@/types/user";
 import { createContext } from "react";
 
 export const AuthContext = createContext<{
@@ -7,10 +7,12 @@ export const AuthContext = createContext<{
   logOut: () => Promise<void>;
   isLoggedIn: boolean;
   isLoggedOut: boolean;
+  isAuthorizedTo: (operation: OPERATIONS) => boolean;
 }>({
   user: null,
   logIn: async () => {},
   logOut: async () => {},
   isLoggedIn: false,
   isLoggedOut: true,
+  isAuthorizedTo: () => false,
 });

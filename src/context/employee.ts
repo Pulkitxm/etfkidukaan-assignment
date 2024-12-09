@@ -9,6 +9,7 @@ export const EmployeeContext = createContext<{
   };
   allTimeWork: Record<string, number>;
   loading: boolean;
+  deleteEmployee: (id: number) => void;
 }>({
   employees: [],
   loading: false,
@@ -17,4 +18,5 @@ export const EmployeeContext = createContext<{
     allTimeWork: {},
   }),
   allTimeWork: {},
+  deleteEmployee: () => {},
 });
