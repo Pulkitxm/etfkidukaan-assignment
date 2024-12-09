@@ -48,6 +48,22 @@ export default function Login() {
     [loading, logIn, navigate]
   );
 
+  const Login = useCallback(
+    async (values: LoginFormValues) => {
+      setLoading(true);
+      await logIn({
+        ...values,
+        role: values.email.includes("admin")
+          ? RBAC_ROLES.ADMIN
+          : RBAC_ROLES.USER,
+      });
+      setLoading(false);
+      toast.success("You are successfully logged in");
+      navigate("/dashboard");
+    },
+    [logIn, navigate]
+  );
+
   return (
     <section className="h-full flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
       <div className="md:w-1/3 max-w-sm">
@@ -69,6 +85,24 @@ export default function Login() {
           placeholder="Password"
           name="password"
         />
+        <div className="flex flex-wrap items-center justify-center space-x-4 mt-4">
+          <button
+            className="h-10 w-32 flex items-center justify-center bg-blue-600 hover:bg-blue-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider"
+            type="button"
+            onClick={() =>
+              Login({ email: "admin@admin.com", password: "admin" })
+            }
+          >
+            Login as Admin
+          </button>
+          <button
+            className="h-10 w-32 flex items-center justify-center bg-green-600 hover:bg-green-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider"
+            type="button"
+            onClick={() => Login({ email: "user@user.com", password: "user" })}
+          >
+            Login as User
+          </button>
+        </div>
         <div className="flex items-center justify-center text-center md:text-left">
           <button
             className="mt-4 h-8 w-20 flex items-center justify-center bg-blue-600 hover:bg-blue-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider"
