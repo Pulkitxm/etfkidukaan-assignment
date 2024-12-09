@@ -1,7 +1,17 @@
+import Navbar from "@/components/Navbar";
+import EtfRoutes from "@/routes";
+import { Toaster } from "sonner";
+
 export default function App() {
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-  )
+    <div className="h-screen w-screen flex flex-col">
+      <Toaster />
+      <div className="h-18">
+        <Navbar />
+      </div>
+      <div className="flex-grow overflow-y-auto">
+        <EtfRoutes />
+      </div>
+    </div>
+  );
 }
